@@ -38,7 +38,7 @@ void prints(const char *string, size_t size)
 
 void manage_conversion(char *conversion)
 {
-	putchar(*conversion);
+	prints(conversion, 1);
 }
 
 
