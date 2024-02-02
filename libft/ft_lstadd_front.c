@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpalmese <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/08 11:28:05 by dpalmese          #+#    #+#             */
-/*   Updated: 2024/01/08 11:28:08 by dpalmese         ###   ########.fr       */
+/*   Created: 2024/01/21 16:12:52 by dpalmese          #+#    #+#             */
+/*   Updated: 2024/01/21 16:15:32 by dpalmese         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-/*
- * Erase first n bytes by writing zeros.
- */
-void	ft_bzero(void *ptr, size_t n)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	ft_memset(ptr, 0, n);
+	t_list	*first;
+
+	if (!lst || !new)
+		return ;
+	first = *lst;
+	if (first)
+	{
+		new->next = first;
+		*lst = new;
+	}
+	else
+		*lst = new;
 }

@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpalmese <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/08 11:28:05 by dpalmese          #+#    #+#             */
-/*   Updated: 2024/01/08 11:28:08 by dpalmese         ###   ########.fr       */
+/*   Created: 2024/01/25 10:38:18 by dpalmese          #+#    #+#             */
+/*   Updated: 2024/01/25 10:38:37 by dpalmese         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-/*
- * Erase first n bytes by writing zeros.
- */
-void	ft_bzero(void *ptr, size_t n)
+void	ft_strrev(char *str)
 {
-	ft_memset(ptr, 0, n);
+	int		i;
+	int		size;
+	char	tmp;
+
+	i = 0;
+	size = ft_strlen(str) - 1;
+	while (i < size)
+	{
+		tmp = str[i];
+		str[i] = str[size];
+		str[size] = tmp;
+		i++;
+		size--;
+	}
 }

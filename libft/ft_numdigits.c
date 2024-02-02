@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_numdigits.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpalmese <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/08 11:28:05 by dpalmese          #+#    #+#             */
-/*   Updated: 2024/01/08 11:28:08 by dpalmese         ###   ########.fr       */
+/*   Created: 2024/01/19 12:00:54 by dpalmese          #+#    #+#             */
+/*   Updated: 2024/01/19 12:00:57 by dpalmese         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-/*
- * Erase first n bytes by writing zeros.
- */
-void	ft_bzero(void *ptr, size_t n)
+int	ft_numdigits(int n)
 {
-	ft_memset(ptr, 0, n);
+	int	i;
+
+	i = 0;
+	if (n == 0)
+		i++;
+	if (n < 0)
+		i++;
+	while (n)
+	{
+		i++;
+		n /= 10;
+	}
+	return (i);
 }

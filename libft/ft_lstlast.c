@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpalmese <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/08 11:28:05 by dpalmese          #+#    #+#             */
-/*   Updated: 2024/01/08 11:28:08 by dpalmese         ###   ########.fr       */
+/*   Created: 2024/01/21 16:17:59 by dpalmese          #+#    #+#             */
+/*   Updated: 2024/01/21 16:18:02 by dpalmese         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-/*
- * Erase first n bytes by writing zeros.
- */
-void	ft_bzero(void *ptr, size_t n)
+t_list	*ft_lstlast(t_list *lst)
 {
-	ft_memset(ptr, 0, n);
+	t_list	*current;
+
+	current = lst;
+	if (!current)
+		return (NULL);
+	while (current->next)
+	{
+		current = current->next;
+	}
+	return (current);
 }

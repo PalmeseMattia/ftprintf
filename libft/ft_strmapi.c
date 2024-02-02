@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpalmese <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/08 11:28:05 by dpalmese          #+#    #+#             */
-/*   Updated: 2024/01/08 11:28:08 by dpalmese         ###   ########.fr       */
+/*   Created: 2024/01/19 21:46:47 by dpalmese          #+#    #+#             */
+/*   Updated: 2024/01/19 21:46:51 by dpalmese         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-/*
- * Erase first n bytes by writing zeros.
- */
-void	ft_bzero(void *ptr, size_t n)
+char	*ft_strmapi(const char *s, char (*f)(unsigned int, char))
 {
-	ft_memset(ptr, 0, n);
+	char			*src;
+	unsigned int	i;
+
+	i = 0;
+	src = ft_strdup(s);
+	if (!src)
+		return (NULL);
+	while (src[i])
+	{
+		src[i] = f(i, s[i]);
+		i++;
+	}
+	return (src);
 }

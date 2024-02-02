@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dpalmese <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/08 12:44:10 by dpalmese          #+#    #+#             */
+/*   Updated: 2024/01/08 14:43:31 by dpalmese         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "libft.h"
 
 /*
@@ -6,22 +17,14 @@
  * Note that a byte for the NULL should be included in size.
  * Android style
  */
-size_t ft_strlcpy(char *dst, const char *src, size_t size)
+size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
-    const char *s = src;
-	unsigned char *d = (unsigned char *)dst;
-    size_t n = size;
+	size_t	i;
 
-    while(n--){
-        if((*d++ = *s++) == '\0'){ /* assign and at the same time check if string endend */ 
-        break;
-        }
-    }
-	/* Not enough room in dst, add NULL and traverse rest of src */
-    if (n == 0) {
-		if (size != 0)
-			*d = '\0';		/* NULL-terminate dst */
-		while (*s++);
-	}
-    return(s - src - 1);	/* count does not include NUL */
+	i = -1;
+	while (src[++i] && (i + 1) < size)
+		dest[i] = src[i];
+	if (size)
+		dest[i] = '\0';
+	return (ft_strlen(src));
 }

@@ -1,20 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dpalmese <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/08 12:40:28 by dpalmese          #+#    #+#             */
+/*   Updated: 2024/01/08 12:43:46 by dpalmese         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "libft.h"
 
-/*
- * append src to end of dst
- *
- */
-size_t ft_strlcat(char *dst, const char *src, size_t size)
+unsigned int	ft_strlcat(char *dest, const char *src, size_t dstsize)
 {
-    size_t maxlen= size - ft_strlen(dst) - 1;    /* Maximum number of characters we can append */
-    size_t srclen = ft_strlen(src);
-    size_t dstlen = ft_strnlen(dst, size); 
-    if(dstlen == size) return size + srclen;        
-    if(srclen < size - dstlen){    /* If the src fit inside size we memcpy */
-        ft_memcpy(dst + dstlen, src, srclen + 1);
-    } else {
-        ft_memcpy(dst + dstlen, src, maxlen -1);
-        dst[dstlen + maxlen - 1] = '\0';
-    }
-    return dstlen + srclen; 
+	size_t	i;
+	size_t	len_dst;
+	size_t	srclen;
+
+	i = 0;
+	srclen = ft_strlen(src);
+	if (dstsize == 0)
+		return ((unsigned int)srclen);
+	if (dstsize < ft_strlen(dest))
+		return (dstsize + srclen);
+	len_dst = ft_strlen(dest);
+	while (dstsize > len_dst + i + 1 && src[i])
+	{
+		dest[i + len_dst] = src[i];
+		i++;
+	}
+	dest[i + len_dst] = '\0';
+	return (len_dst + srclen);
 }

@@ -5,9 +5,8 @@
 
 #define CHAR_SIZE CHAR_BIT/8
 
-ssize_t prints(const char *src, size_t size);
 int ft_printf(const char *format, ...);
-void manage_conversion(char *conversion, va_list arguments);
+int manage_conversion(char *conversion, va_list arguments);
 
 int main()
 {
@@ -17,28 +16,21 @@ int main()
 
 int ft_printf(const char *format, ...)
 {
-	va_list arguments;
-	va_start(arguments, format);
-	char *next_stop;
-	int chars_printed = 0;
+	va_list	arguments;
+	int		chars_printed;
+	char	*next_stop;
 
-	while((next_stop = ft_strchr(format,'%')) != NULL){ // Search for the next % character
-		prints(format, next_stop-format);
-		chars_printed += (next_stop-format)/CHAR_SIZE;
-		manage_conversion(next_stop + CHAR_SIZE, arguments);
+	chars_printed = 0;
+	va_start(arguments, format);
+	while ((next_stop = ft_strchr(format,'%')) != NULL)
+	{
+		chars_printed += ft_putnstr_fd((char *)format, next_stop - format, 1);// Search for the next % character
+		chars_printed += manage_conversion(next_stop + CHAR_SIZE, arguments);
 		format = next_stop + (2 * CHAR_SIZE); // TODO:Test in case of two %% adiacent or %d%d for example
 	}
-
-	prints(format, ft_strlen(format));
+	chars_printed += ft_putstr_fd((char *)format, 1);
 	va_end(arguments);
-}
-
-/**
- * Write string to the stdout
-*/
-ssize_t prints(const char *src, size_t size)
-{
-	return write(1, src, size);	
+	return (chars_printed);
 }
 
 /**
@@ -49,20 +41,20 @@ ssize_t prints(const char *src, size_t size)
  * Do what the compiler asks you for (use va_arg() with int as its second parameter), 
  * else your code will invoke undefined behavior.
 */
-void manage_conversion(char *conversion, va_list arguments)
+int manage_conversion(char *conversion, va_list arguments)
 {
-	switch (*conversion) {
-	case 'c':
+	if (*conversion == 'c')
+	{
 		int character = va_arg(arguments, int);
-		prints((const char *)&character,1);
-		break;
-	case 's':
-		char *string = va_arg(arguments, char*);
-		prints((const char *)string, ft_strlen(string));
-		break;
-	default:
-		break;
+		return (ft_putchar_fd((char)character, 1));
 	}
+	else if(*conversion == 's')
+	{
+		char *string = va_arg(arguments, char*);
+		return (ft_putstr_fd(string, 1));
+	}
+	else
+		return (0);
 }
 
 

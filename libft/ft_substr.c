@@ -1,38 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpalmese <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/08 11:28:29 by dpalmese          #+#    #+#             */
-/*   Updated: 2024/01/21 11:44:39 by dpalmese         ###   ########.fr       */
+/*   Created: 2024/01/23 10:39:23 by dpalmese          #+#    #+#             */
+/*   Updated: 2024/01/30 10:36:17 by dpalmese         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-/*
- * The calloc() function allocates memory for an array of nmemb elements of
- * size bytes each and returns a pointer to  the  allocated memory.
- * The memory is set to zero.
- */
-void	*ft_calloc(size_t nmemb, size_t size)
+char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
-	void	*p;
-	size_t	bytes;
+	char	*ret;
+	size_t	i;
+	size_t	j;
 
-	if (nmemb == 0 || size == 0)
+	i = 0;
+	j = 0;
+	if (s == NULL)
+		return (NULL);
+	if (start >= ft_strlen(s))
+		return (ft_strdup(""));
+	if (len + start > ft_strlen(s))
+		len = ft_strlen(s + start);
+	ret = (char *)ft_calloc(sizeof(char), (len + 1));
+	if (ret == NULL)
+		return (NULL);
+	while (s[i])
 	{
-		nmemb = 1;
-		size = 1;
+		if (i >= start && j < len && s[i])
+		{
+			ret[j++] = s[i];
+		}
+		i++;
 	}
-	bytes = nmemb * size;
-	if (bytes / size != nmemb)
-		return (NULL);
-	p = malloc(bytes);
-	if (!p)
-		return (NULL);
-	ft_bzero(p, bytes);
-	return (p);
+	ret[j] = '\0';
+	return (ret);
 }
