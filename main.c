@@ -10,8 +10,7 @@ int manage_conversion(char *conversion, va_list arguments);
 
 int main()
 {
-	ft_printf(	"lo zio%c %c %s zia. Sono sposati da %d anni.\n",
-				',','e',"la bella", -10);
+	ft_printf("ovvero %x in esadecimale.\n",15);
 	return 0;
 }
 
@@ -46,21 +45,27 @@ int manage_conversion(char *conversion, va_list arguments)
 {
 	if (*conversion == 'c')
 	{
-		int character = va_arg(arguments, int);
-		return (ft_putchar_fd((char)character, 1));
+		return (ft_putchar_fd((char)va_arg(arguments, int), 1));
 	}
 	else if (*conversion == 's')
 	{
-		char *string = va_arg(arguments, char*);
-		return (ft_putstr_fd(string, 1));
+		return (ft_putstr_fd(va_arg(arguments, char*), 1));
 	}
-	else if (*conversion == 'd')
+	else if (*conversion == 'd' || *conversion == 'i')
 	{
-		int number =va_arg(arguments, int);
+		int number = va_arg(arguments, int);
 		if(number < 0)
 			return (ft_putnbrbase_fd(number, 10, 1) + 1);
 		else
 			return (ft_putnbrbase_fd(number, 10, 1));
+	}
+	else if (*conversion == 'x' || *conversion == 'X')
+	{
+		int number = va_arg(arguments, int);
+		if (*conversion == 'x')
+			return (ft_putnbrbase_fd(number, 16, 1)); //to lower
+		else if (*conversion == 'X')
+			return (ft_putnbrbase_fd(number, 16, 1));
 	}
 	else
 		return (0);
