@@ -10,7 +10,8 @@ int manage_conversion(char *conversion, va_list arguments);
 
 int main()
 {
-	ft_printf("lo zio%c%c %s zia\n",',','e',"la bella");
+	ft_printf(	"lo zio%c %c %s zia. Sono sposati da %d anni.\n",
+				',','e',"la bella", -10);
 	return 0;
 }
 
@@ -26,7 +27,6 @@ int ft_printf(const char *format, ...)
 	{
 		chars_printed += ft_putnstr_fd((char *)format, next_stop - format, 1);
 		chars_printed += manage_conversion(next_stop + CHAR_SIZE, arguments);
-		// TODO:Test in case of two %% adiacent or %d%d for example
 		format = next_stop + (2 * CHAR_SIZE);
 	}
 	chars_printed += ft_putstr_fd((char *)format, 1);
@@ -49,10 +49,18 @@ int manage_conversion(char *conversion, va_list arguments)
 		int character = va_arg(arguments, int);
 		return (ft_putchar_fd((char)character, 1));
 	}
-	else if(*conversion == 's')
+	else if (*conversion == 's')
 	{
 		char *string = va_arg(arguments, char*);
 		return (ft_putstr_fd(string, 1));
+	}
+	else if (*conversion == 'd')
+	{
+		int number =va_arg(arguments, int);
+		if(number < 0)
+			return (ft_putnbrbase_fd(number, 10, 1) + 1);
+		else
+			return (ft_putnbrbase_fd(number, 10, 1));
 	}
 	else
 		return (0);
