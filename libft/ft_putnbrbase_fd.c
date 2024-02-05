@@ -1,11 +1,11 @@
 #include "libft.h"
 
-int	ft_putnbrbase_fd(int number, int base, int fd)
+int	ft_putnbrbase_fd(long number, int base, int fd)
 {
 	char *digits;
 	int result;
 
-	digits = "0123456789ABCDEF";
+	digits = "0123456789abcdef";
 	if (fd < 0)
 		return (0);
 	if (base < 2 || base > 16)

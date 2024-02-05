@@ -1,6 +1,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdarg.h>
+#include <limits.h>
 #include "libft/libft.h"
 
 #define CHAR_SIZE CHAR_BIT/8
@@ -10,7 +11,8 @@ int manage_conversion(char *conversion, va_list arguments);
 
 int main()
 {
-	ft_printf("ovvero %x in esadecimale.\n",15);
+	int result = ft_printf("%d\n", -150);
+	ft_printf("Result: %d\n", result);
 	return 0;
 }
 
@@ -44,21 +46,11 @@ int ft_printf(const char *format, ...)
 int manage_conversion(char *conversion, va_list arguments)
 {
 	if (*conversion == 'c')
-	{
 		return (ft_putchar_fd((char)va_arg(arguments, int), 1));
-	}
 	else if (*conversion == 's')
-	{
 		return (ft_putstr_fd(va_arg(arguments, char*), 1));
-	}
 	else if (*conversion == 'd' || *conversion == 'i')
-	{
-		int number = va_arg(arguments, int);
-		if(number < 0)
-			return (ft_putnbrbase_fd(number, 10, 1) + 1);
-		else
-			return (ft_putnbrbase_fd(number, 10, 1));
-	}
+		return (ft_putstr_fd(ft_itoa(va_arg(arguments, int)), 1));
 	else if (*conversion == 'x' || *conversion == 'X')
 	{
 		int number = va_arg(arguments, int);
@@ -67,8 +59,8 @@ int manage_conversion(char *conversion, va_list arguments)
 		else if (*conversion == 'X')
 			return (ft_putnbrbase_fd(number, 16, 1));
 	}
+	else if (*conversion == 'u')
+		return (ft_putnbrbase_fd(va_arg(arguments, unsigned int),10, 1));
 	else
 		return (0);
 }
-
-
