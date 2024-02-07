@@ -1,6 +1,6 @@
-#include "ftprintf.h"
+#include "ft_printf.h"
 
-int manage_conversion(char *conversion, va_list arguments)
+int ft_manage_conversion(char *conversion, va_list arguments)
 {
 	if (*conversion == 'c')
 		return (ft_putchar_fd((char)va_arg(arguments, int), 1));

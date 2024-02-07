@@ -7,6 +7,6 @@
 #define CHAR_SIZE CHAR_BIT/8
 
 int	ft_printf(const char *format, ...);
-int manage_conversion(char *conversion, va_list arguments);
+int ft_manage_conversion(char *conversion, va_list arguments);
 
 #endif

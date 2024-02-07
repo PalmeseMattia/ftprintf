@@ -1,4 +1,4 @@
-#include "ftprintf.h"
+#include "ft_printf.h"
 
 int	ft_printf(const char *format, ...)
 {
@@ -11,7 +11,7 @@ int	ft_printf(const char *format, ...)
 	while ((next_stop = ft_strchr(format,'%')) != NULL)
 	{
 		chars_printed += ft_putnstr_fd((char *)format, next_stop - format, 1);
-		chars_printed += manage_conversion(next_stop + CHAR_SIZE, arguments);
+		chars_printed += ft_manage_conversion(next_stop + CHAR_SIZE, arguments);
 		format = next_stop + (2 * CHAR_SIZE);
 	}
 	chars_printed += ft_putstr_fd((char *)format, 1);
