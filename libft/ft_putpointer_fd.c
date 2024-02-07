@@ -6,7 +6,7 @@
 /*   By: dpalmese <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 17:54:21 by dpalmese          #+#    #+#             */
-/*   Updated: 2024/02/05 10:47:44 by rizz             ###   ########.fr       */
+/*   Updated: 2024/02/07 14:33:55 by dpalmese         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -38,7 +38,7 @@ int	ft_putpointer_fd(void *p, int fd)
 	while (i >= 0)
 	{
 		byte = MASK(p_intvalue, i);
-		result += ft_putnbrbase_fd((long)byte, 16, 1);
+		result += ft_putnbrbase_fd((long)byte, 16, 1, 0);
 		i--;
 	}
 	return (result);

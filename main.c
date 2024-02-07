@@ -11,12 +11,12 @@ int manage_conversion(char *conversion, va_list arguments);
 
 int main()
 {
-	int result = ft_printf("%d\n", -150);
+	int result = ft_printf("%d", -10);
 	ft_printf("Result: %d\n", result);
 	return 0;
 }
 
-int ft_printf(const char *format, ...)
+int	ft_printf(const char *format, ...)
 {
 	va_list	arguments;
 	int		chars_printed;
@@ -50,17 +50,14 @@ int manage_conversion(char *conversion, va_list arguments)
 	else if (*conversion == 's')
 		return (ft_putstr_fd(va_arg(arguments, char*), 1));
 	else if (*conversion == 'd' || *conversion == 'i')
-		return (ft_putstr_fd(ft_itoa(va_arg(arguments, int)), 1));
-	else if (*conversion == 'x' || *conversion == 'X')
-	{
-		int number = va_arg(arguments, int);
-		if (*conversion == 'x')
-			return (ft_putnbrbase_fd(number, 16, 1)); //to lower
-		else if (*conversion == 'X')
-			return (ft_putnbrbase_fd(number, 16, 1));
-	}
+		return (ft_putnbrbase_fd(va_arg(arguments, int), 10, 1, 0));
+	else if (*conversion == 'x')
+			return (ft_putnbrbase_fd(va_arg(arguments, int), 16, 1, 0));
+	else if (*conversion == 'X')
+			return (ft_putnbrbase_fd(va_arg(arguments, int), 16, 1, 1));
 	else if (*conversion == 'u')
-		return (ft_putnbrbase_fd(va_arg(arguments, unsigned int),10, 1));
-	else
-		return (0);
+		return (ft_putnbrbase_fd(va_arg(arguments, unsigned int),10, 1, 0));
+	else if (*conversion == 'p')
+		return (ft_putpointer_fd(va_arg(arguments, void *), 1));
+	return (0);
 }
