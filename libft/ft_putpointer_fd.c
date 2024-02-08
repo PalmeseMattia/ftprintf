@@ -6,13 +6,12 @@
 /*   By: dpalmese <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 17:54:21 by dpalmese          #+#    #+#             */
-/*   Updated: 2024/02/07 14:33:55 by dpalmese         ###   ########.fr       */
+/*   Updated: 2024/02/07 21:59:49 by rizz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-#define MASK(data, shift) ((data >> (shift * 4)) & 0xF)
-#define NIBBLES(x) sizeof(x) * 2
+#define MASK(data, shift) (data >> (shift * 4) & 0xF)
 
 /*
  * Write the address pointed by p to the file descriptor fd,
@@ -25,8 +24,10 @@ int	ft_putpointer_fd(void *p, int fd)
 	int					result;
 	unsigned char		byte;
 
+	if(!p)
+		return (ft_putchar_fd('0', fd));
 	result = 0;
-	i = NIBBLES(p);
+	i = (sizeof(p) * 2) - 1;
 	p_intvalue = (uintptr_t) p;
 	result += ft_putstr_fd("0x", fd);
 	byte = MASK(p_intvalue, i);
