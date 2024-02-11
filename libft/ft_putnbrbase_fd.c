@@ -23,7 +23,7 @@ int	ft_putnbrbase_fd(long number, int base, int fd, int capital)
 			result += ft_putchar_fd(ft_toupper(digits[number]), fd);
 		else
 			result += ft_putchar_fd(digits[number], fd);
-		return (1);
+		return (result);
 	}
 	result += ft_putnbrbase_fd(number / base, base, fd, capital);
 	result += ft_putchar_fd(digits[number % base], fd);
