@@ -15,7 +15,7 @@ int	ft_putnbrbase_fd(long number, int base, int fd, int capital)
 	{
 		ft_putchar_fd('-', fd);
 		number = -number;
-		result++;
+		result += 1;
 	}
 	if (number < base)
 	{
