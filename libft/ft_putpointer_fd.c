@@ -6,7 +6,7 @@
 /*   By: dpalmese <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 17:54:21 by dpalmese          #+#    #+#             */
-/*   Updated: 2024/02/07 21:59:49 by rizz             ###   ########.fr       */
+/*   Updated: 2024/02/12 12:41:11 by dpalmese         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -25,7 +25,7 @@ int	ft_putpointer_fd(void *p, int fd)
 	unsigned char		byte;
 
 	if(!p)
-		return (ft_putchar_fd('0', fd));
+		return (ft_putstr_fd("0x0", fd));
 	result = 0;
 	i = (sizeof(p) * 2) - 1;
 	p_intvalue = (uintptr_t) p;
